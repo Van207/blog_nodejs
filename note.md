@@ -34,3 +34,6 @@
 	npm i node-sass
 	Thêm script
 	"watch": "node-sass --watch src/resources/scss/app.scss src/public/css/app.css",
+
+7. Query parameters
+	req.query

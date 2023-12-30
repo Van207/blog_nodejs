@@ -5,26 +5,28 @@ const handlebars = require('express-handlebars');
 const app = express();
 const port = 3000;
 
+const route = require('./routes/index')
+
+
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.urlencoded({
+	extended: true
+}))
+app.use(express.json())
 
 // HTTP Logger
-app.use(morgan('combined'));
+// app.use(morgan('combined'));
 
 // Template engine
 app.engine('hbs', handlebars.engine({
 	extname: '.hbs' 	// Config file name handlebars
 }));
 app.set('view engine', 'hbs');
-app.set('views', './views');
+
 app.set('views', path.join(__dirname, './resources/views'));
 
-app.get('/', (req, res) => {
-	res.render('home')
-})
-
-app.get('/tin-tuc', (req, res) => {
-	res.render('news')
-})
+// Routes
+route(app)
 
 app.listen(port, () => {
 	console.log(`Example app listening at http://localhost:${port}`);
